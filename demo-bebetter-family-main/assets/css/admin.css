@@ -1,0 +1,115 @@
+/* CSS THEME HIỆN ĐẠI CHO TRANG QUẢN TRỊ */
+:root {
+    --primary-color: #1a5c78; /* Xanh navy thanh lịch */
+    --primary-hover: #124358;
+    --secondary-color: #1B3A6B; /* Xanh nhạt hiện đại */
+    --danger-color: #e63946;
+    --danger-hover: #c42936;
+    --success-color: #2a9d8f;
+    --success-hover: #218276;
+    --bg-color: #f4f7f6;
+    --card-bg: #ffffff;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --border-color: #e0e0e0;
+}
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: var(--bg-color); 
+    color: var(--text-main);
+    margin: 0; 
+    padding: 40px 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.hidden { display: none !important; }
+
+/* Card (Khung trắng đổ bóng) */
+.card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+h1, h2 { color: var(--primary-color); margin-top: 0; }
+h1 { font-size: 24px; text-align: center; margin-bottom: 30px; font-weight: 700;}
+h2 { font-size: 18px; border-bottom: 2px solid var(--bg-color); padding-bottom: 10px; margin-bottom: 20px;}
+
+/* Form Styles */
+.form-group { margin-bottom: 16px; }
+label { display: block; font-weight: 500; margin-bottom: 6px; font-size: 14px; color: #444; }
+
+input[type="text"], input[type="email"], input[type="password"], input[type="file"] { 
+    width: 100%; 
+    padding: 10px 12px; 
+    box-sizing: border-box; 
+    border: 1px solid var(--border-color); 
+    border-radius: 6px; 
+    font-family: inherit;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+input:focus { border-color: var(--primary-color); outline: none; box-shadow: 0 0 0 3px rgba(26, 92, 120, 0.1); }
+
+.grid-2-cols { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 0 20px; 
+}
+
+@media (min-width: 600px) {
+    .grid-2-cols { grid-template-columns: 1fr 1fr; }
+}
+
+/* Buttons */
+button { 
+    padding: 10px 18px; 
+    background: var(--primary-color); 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 6px; 
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.2s, transform 0.1s;
+}
+button:hover { background: var(--primary-hover); }
+button:active { transform: scale(0.98); }
+
+.btn-danger { background: var(--danger-color); }
+.btn-danger:hover { background: var(--danger-hover); }
+
+.btn-success { background: var(--success-color); width: 100%; padding: 12px;}
+.btn-success:hover { background: var(--success-hover); }
+
+.btn-small { padding: 6px 12px; font-size: 12px; }
+
+/* Bảng danh sách */
+.table-container { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid var(--border-color); }
+th { background-color: #f8fafc; color: var(--primary-color); font-weight: 600; white-space: nowrap; }
+tbody tr:hover { background-color: #f8fafc; }
+
+td img { 
+    width: 45px; 
+    height: 45px; 
+    object-fit: cover; 
+    border-radius: 50%; /* Ảnh thẻ hình tròn cho hiện đại */
+    border: 2px solid #eee;
+}
+
+.header-admin { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.header-admin h1 { margin: 0; text-align: left;}
+
+/* Khung đăng nhập nhỏ gọn */
+#login-section .card { max-width: 400px; margin: 40px auto; }

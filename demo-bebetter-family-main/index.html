@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Be Better Family</title>
+  <meta name="description"
+    content="Quỹ Học Bổng Chắp Cánh — Mỗi gương mặt là một hành trình đang được tiếp sức. Khám phá danh mục sinh viên nhận học bổng của Quỹ Be Better.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Be Better Family">
+  <meta property="og:description" content="Mỗi gương mặt là một hành trình đang được tiếp sức.">
+  <meta property="og:type" content="website">
+
+  <!-- Preconnect fonts để tải nhanh hơn -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="icon" href="assets/images/logo-white.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+
+  <nav id="mainNav">
+    <div class="nav-pill" id="navPill">
+      <img src="assets/images/logo-bebetter.svg" alt="Logo Be Better Family" class="logo-img">
+    </div>
+    <div class="nav-links">
+      <div class="nav-user-info" id="navUserInfo" style="display:none;">
+        <div class="nav-user-avatar" id="navUserAvatar"></div>
+        <span class="nav-user-name" id="navUserName"></span>
+      </div>
+      <button type="button" class="nav-btn-logout" id="navLogoutBtn" style="display:none;"
+        onclick="window.__studentLogout()">Đăng xuất</button>
+      <button type="button" class="nav-btn-admin" onclick="window.location.href='./admin.html'">Quản trị</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">Vì con người · Vì tương lai</div>
+    <h1>Mỗi gương mặt là <em>một hành trình</em><br>đang được tiếp sức.</h1>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="num mono" id="statStudents">...</div>
+        <div class="label">Sinh viên</div>
+      </div>
+      <div class="stat">
+        <div class="num mono" id="statMajors">...</div>
+        <div class="label">Ngành học</div>
+      </div>
+      <div class="stat">
+        <div class="num mono" id="statSchools">...</div>
+        <div class="label">Trường</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="main-layout" id="directory">
+    <aside class="sidebar">
+      <button type="button" class="filter-panel-header" id="filterPanelToggle" aria-expanded="true"
+        aria-controls="filterPanelWrap">
+        <span class="filter-panel-header-icon">
+          <svg viewBox="0 0 24 24">
+            <polygon points="4 4 20 4 14 12 14 19 10 21 10 12 4 4" />
+          </svg>
+        </span>
+        <span class="filter-panel-header-text">Bộ lọc</span>
+        <svg class="chevron panel-chevron" viewBox="0 0 24 24">
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+
+      <div class="filter-panel-collapse-wrap" id="filterPanelWrap">
+        <div class="filter-panel-collapse-inner">
+          <div class="filter-panel-subhead">
+            <span class="filter-panel-hint">Tinh chỉnh danh sách</span>
+            <button class="clear-btn" id="clearBtn">Xóa tất cả</button>
+          </div>
+
+          <div class="filter-accordion" data-filter-key="major">
+            <button type="button" class="filter-accordion-header" aria-expanded="true">
+              <span class="filter-accordion-title">Ngành học</span>
+              <span class="filter-count" id="countMajor"></span>
+              <svg class="chevron" viewBox="0 0 24 24">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <div class="filter-accordion-body">
+              <div class="filter-accordion-body-inner">
+                <div class="checkbox-list" id="filterMajor" role="group" aria-label="Lọc theo ngành học"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-accordion" data-filter-key="school">
+            <button type="button" class="filter-accordion-header" aria-expanded="true">
+              <span class="filter-accordion-title">Trường</span>
+              <span class="filter-count" id="countSchool"></span>
+              <svg class="chevron" viewBox="0 0 24 24">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <div class="filter-accordion-body">
+              <div class="filter-accordion-body-inner">
+                <div class="checkbox-list" id="filterSchool" role="group" aria-label="Lọc theo trường"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-accordion" data-filter-key="year">
+            <button type="button" class="filter-accordion-header" aria-expanded="true">
+              <span class="filter-accordion-title">Năm học</span>
+              <span class="filter-count" id="countYear"></span>
+              <svg class="chevron" viewBox="0 0 24 24">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <div class="filter-accordion-body">
+              <div class="filter-accordion-body-inner">
+                <div class="checkbox-list" id="filterYear" role="group" aria-label="Lọc theo năm học"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="content">
+      <div class="result-count" id="resultCount"></div>
+      <div class="load-state" id="loadState">Đang tải danh sách sinh viên…</div>
+      <div class="grid" id="grid"></div>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <h3>Không tìm thấy sinh viên phù hợp</h3>
+        <p>Thử điều chỉnh lại bộ lọc ngành học, trường hoặc năm học.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── LOGIN OVERLAY ── -->
+  <div class="login-overlay" id="loginOverlay" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <div class="login-backdrop"></div>
+    <div class="login-card">
+      <div class="login-brand">
+        <img src="assets/images/logo-bebetter.svg" alt="Be Better" class="login-logo">
+      </div>
+      <div class="login-header">
+        <h2 id="loginTitle">Chào mừng trở lại</h2>
+        <p>Đăng nhập bằng mã CF và mật khẩu được cấp để xem và chỉnh sửa hồ sơ của bạn.</p>
+      </div>
+      <form class="login-form" id="loginForm" onsubmit="return false;">
+        <div class="login-field">
+          <label for="loginCF">Mã CF</label>
+          <div class="login-input-wrap">
+            <svg viewBox="0 0 24 24" class="login-field-icon">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <input type="text" id="loginCF" placeholder="VD: CF001" autocomplete="username" spellcheck="false">
+          </div>
+        </div>
+        <div class="login-field">
+          <label for="loginPassword">Mật khẩu</label>
+          <div class="login-input-wrap">
+            <svg viewBox="0 0 24 24" class="login-field-icon">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+          </div>
+        </div>
+        <div class="login-error" id="loginError" style="display:none;"></div>
+        <button type="submit" class="login-btn" id="loginSubmitBtn" onclick="window.__studentLogin()">Đăng nhập</button>
+      </form>
+      <div class="login-footer">
+        Quỹ Học Bổng Be Better &mdash; Học bổng Thay Đổi Tương Lai
+      </div>
+    </div>
+  </div>
+
+  <!-- ── EDIT PROFILE MODAL ── -->
+  <div class="edit-modal-overlay" id="editProfileModal" role="dialog" aria-modal="true"
+    aria-labelledby="editModalTitle">
+    <div class="edit-modal">
+      <div class="edit-modal-header">
+        <h3 id="editModalTitle">Chỉnh sửa thông tin cá nhân</h3>
+        <button class="edit-modal-close" id="editModalClose" aria-label="Đóng">
+          <svg viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <div class="edit-modal-body">
+        <div class="edit-photo-section">
+          <div class="edit-avatar-wrap">
+            <img id="editAvatarPreview" src="" alt="Ảnh đại diện">
+            <label class="edit-avatar-btn" for="editPhotoInput">
+              <svg viewBox="0 0 24 24">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                <circle cx="12" cy="13" r="4" />
+              </svg>
+              Đổi ảnh
+            </label>
+            <input type="file" id="editPhotoInput" accept="image/*" style="display:none;">
+          </div>
+        </div>
+        <div class="edit-fields">
+          <div class="edit-field-row">
+            <div class="edit-field">
+              <label for="editMajor">Ngành học</label>
+              <input type="text" id="editMajor" placeholder="VD: Công nghệ thông tin">
+            </div>
+            <div class="edit-field">
+              <label for="editSchool">Trường đại học</label>
+              <input type="text" id="editSchool" placeholder="VD: ĐH Bách Khoa">
+            </div>
+          </div>
+          <div class="edit-field-row">
+            <div class="edit-field">
+              <label for="editYear">Năm học</label>
+              <input type="text" id="editYear" placeholder="VD: Năm 2">
+            </div>
+            <div class="edit-field">
+              <label for="editFacebook">Facebook</label>
+              <input type="text" id="editFacebook" placeholder="VD: fb.com/ban">
+            </div>
+          </div>
+          <div class="edit-field-row">
+            <div class="edit-field">
+              <label for="editDescription">Mô tả bản thân</label>
+              <textarea id="editDescription" rows="4" placeholder="Viết vài câu về bản thân, sở thích hoặc mục tiêu..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="edit-modal-footer">
+        <div class="edit-save-msg" id="editSaveMsg" style="display:none;"></div>
+        <button class="edit-cancel-btn" id="editCancelBtn">Hủy</button>
+        <button class="edit-save-btn" id="editSaveBtn">Lưu thay đổi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── STUDENT POPUP MODAL ── -->
+  <div class="modal-overlay" id="studentModal" role="dialog" aria-modal="true" aria-labelledby="modalStudentName">
+    <div class="modal" id="modalBox">
+      <button class="modal-close" id="modalClose" aria-label="Đóng">
+        <svg viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+
+      <div class="modal-photo">
+        <img id="modalPhoto" src="" alt="">
+        <div class="modal-name-on-photo">
+          <div class="modal-name" id="modalStudentName"></div>
+          <div class="modal-tag" id="modalYear"></div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-info-grid">
+          <div class="modal-info-item">
+            <span class="info-label">Ngành học</span>
+            <span class="info-value" id="modalMajor">—</span>
+          </div>
+          <div class="modal-info-item">
+            <span class="info-label">Trường</span>
+            <span class="info-value" id="modalSchool">—</span>
+          </div>
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <div class="modal-contact-title">Thông tin</div>
+        <div class="modal-contact-list">
+          <div class="contact-row" id="contactDescription">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-3.3 0-6 2.1-6 4.7V20h12v-1.3c0-2.6-2.7-4.7-6-4.7z" />
+              </svg>
+            </div>
+            <div>
+              <div class="contact-label">Mô tả bản thân</div>
+              <div class="contact-value" id="modalDescription">—</div>
+            </div>
+          </div>
+          <div class="contact-row" id="contactFacebook">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </div>
+            <div>
+              <div class="contact-label">Facebook</div>
+              <div class="contact-value" id="modalFacebook">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nút chỉnh sửa - chỉ hiện khi đây là hồ sơ của sinh viên đang đăng nhập -->
+        <div class="modal-edit-section" id="modalEditSection" style="display:none;">
+          <div class="modal-divider"></div>
+          <button class="modal-edit-btn" id="modalEditBtn">
+            <svg viewBox="0 0 24 24">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+            Chỉnh sửa thông tin của tôi
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Quỹ Be Better - Học bổng Thay Đổi Tương Lai - Mỗi gương mặt là một hành trình đang được tiếp sức.
+    <span class="footer-sep"></span>
+    <a href="https://bebetter.org.vn" target="_blank" rel="noopener">bebetter.org.vn</a>
+  </footer>
+
+  <!-- SheetJS (đọc Excel) — sẽ được thay bằng API khi có database -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script type="module" src="assets/js/app.js"></script>
+  <script type="module" src="assets/js/auth.js"></script>
+
+</body>
+
+</html>

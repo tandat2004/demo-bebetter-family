@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản trị Học bổng BeBetter</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/admin.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Khung đăng nhập -->
+        <div id="login-section">
+            <div class="card">
+                <h1>BeBetter Admin</h1>
+                <div class="form-group">
+                    <label>Email quản trị:</label>
+                    <input type="email" id="email" placeholder="admin@bebetter.vn">
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu:</label>
+                    <input type="password" id="password" placeholder="••••••••">
+                </div>
+                <button onclick="login()" style="width: 100%; margin-top: 10px;">Đăng nhập hệ thống</button>
+            </div>
+        </div>
+
+        <!-- Khung quản lý -->
+        <div id="admin-section" class="hidden">
+            <div class="header-admin">
+                <h1>Sinh viên BeBetter</h1>
+                <button class="btn-danger" onclick="logout()">Đăng xuất</button>
+            </div>
+            
+            <div class="card">
+                <h2 id="form-title">Thêm Hồ sơ Sinh viên mới</h2>
+                
+                <!-- Thẻ input ẩn để lưu ID sinh viên khi đang sửa -->
+                <input type="hidden" id="s_id">
+
+                <div class="grid-2-cols">
+                    <div class="form-group"><label>Họ và tên (*):</label><input type="text" id="s_name" placeholder="VD: Nguyễn Văn A"></div>
+                    <div class="form-group"><label>Ảnh chân dung:</label><input type="file" id="s_image" accept="image/*"></div>
+                    
+                    <div class="form-group"><label>Ngành học:</label><input type="text" id="s_major" placeholder="VD: Công nghệ thông tin"></div>
+                    <div class="form-group"><label>Trường đại học:</label><input type="text" id="s_uni" placeholder="VD: ĐH Bách Khoa"></div>
+                    
+                    <div class="form-group"><label>Năm học / Năm vào quỹ:</label><input type="text" id="s_year" placeholder="VD: Năm 1"></div>
+                    <div class="form-group"><label>Email cá nhân:</label><input type="email" id="s_email" placeholder="VD: sinhvien@gmail.com"></div>
+                    
+                    <div class="form-group"><label>Số điện thoại liên hệ:</label><input type="text" id="s_phone" placeholder="VD: 0901234567"></div>
+                    <div class="form-group"><label>Đường dẫn Facebook:</label><input type="text" id="s_facebook" placeholder="VD: fb.com/nguyenvana"></div>
+                </div>
+                
+                <!-- Cập nhật lại cụm nút bấm -->
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button class="btn-success" id="btn-save" onclick="saveStudent()">+ Lưu Hồ sơ Sinh viên</button>
+                    <button class="btn-danger hidden" id="btn-cancel" onclick="cancelEdit()" style="background: #6c757d;">Hủy chỉnh sửa</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Danh sách Sinh viên đang nhận học bổng</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ảnh</th>
+                                <th>Họ & Tên</th>
+                                <th>Trường</th>
+                                <th>Khóa</th>
+                                <th>SĐT</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="student-list"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tải mã JS quản trị -->
+    <script src="assets/js/admin.js"></script>
+
+</body>
+</html>
